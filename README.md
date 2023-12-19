@@ -140,6 +140,14 @@ Sorpresa fue la mía cuando la implementación de las animaciones Lottie en Watc
 * **Pantalla de Detalle para Series:** con el fin de mejorar la legibilidad y diseño mediante un diseño *responsive*, tamaños de texto dinámicos, organización en tarjetas, etc.
 * **Implementar conectividad entre móvil y reloj:** sincronización de datos y garantizar seguridad para lograr una interacción fluida entre dispositivos móviles y relojes inteligentes.
 
+# Apuntes
+
+* SharedViewModel -> Detección de cambios en distintos fragments. Tendríamos dos fragments, un sharedViewModel donde tenemos una variable que sería la vida que va cambiando y a la que estarían suscritos los dos fragments, así cuando cambia en uno, cambia en el otro.
+* SingleActivity
+* En el HomeActivity mostramos el primer fragment y cuando se pulse en una celda, navgeamos al siguiente fragment.
+* Meter Toast o Dialog cuando se recibe error en la llaamda del login, es decir, cuando las credenciales no son correctas.
+* Añadir SharedPreferences.
+
 ---
 
 [Subir ⬆️](#top)
