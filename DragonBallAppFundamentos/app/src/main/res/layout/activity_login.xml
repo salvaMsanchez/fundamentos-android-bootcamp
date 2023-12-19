@@ -5,111 +5,128 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mainBackground"
-    android:padding="16dp"
     tools:context=".ui.login.LoginActivity">
 
-    <ImageView
-        android:id="@+id/ivTitleLogo"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/login_image_view_content_description"
-        android:src="@drawable/dragon_ball_logo"
+    <ProgressBar
+        android:id="@+id/pbLoginLoading"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/dragonBall"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/title_loggin"
-        android:textColor="@color/dragonBall"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivTitleLogo" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tvAccess"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/subtitle_loggin"
-        android:textColor="@color/gray"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvLogin" />
+        <ImageView
+            android:id="@+id/ivTitleLogo"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/login_image_view_content_description"
+            android:src="@drawable/dragon_ball_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tiLayoutEmail"
-        style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:hint="@string/login_hint_email"
-        android:textColorHint="@color/gray"
-        app:boxStrokeColor="@color/text_input_login_selector"
-        app:errorEnabled="true"
-        app:errorIconDrawable="@drawable/ic_lock"
-        app:hintTextColor="@color/dragonBall"
-        app:layout_constraintBottom_toTopOf="@id/tiLayoutPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvAccess"
-        app:startIconDrawable="@drawable/ic_email">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiEmail"
-            style="@style/LoginTextInputEditText"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
+            android:layout_marginTop="32dp"
+            android:text="@string/title_loggin"
+            android:textColor="@color/dragonBall"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivTitleLogo" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tiLayoutPassword"
-        style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/login_hint_password"
-        android:textColorHint="@color/gray"
-        app:boxStrokeColor="@color/text_input_login_selector"
-
-        app:errorEnabled="true"
-        app:errorIconDrawable="@drawable/ic_lock"
-        app:hintTextColor="@color/dragonBall"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tiLayoutEmail"
-        app:startIconDrawable="@drawable/ic_lock">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiPassword"
-            style="@style/LoginTextInputEditText"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tvAccess"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+            android:text="@string/subtitle_loggin"
+            android:textColor="@color/gray"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLogin" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiLayoutEmail"
+            style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:hint="@string/login_hint_email"
+            android:textColorHint="@color/gray"
+            app:boxStrokeColor="@color/text_input_login_selector"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/ic_lock"
+            app:hintTextColor="@color/dragonBall"
+            app:layout_constraintBottom_toTopOf="@id/tiLayoutPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAccess"
+            app:startIconDrawable="@drawable/ic_email">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnLogin"
-        android:textSize="16sp"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:layout_marginTop="6dp"
-        app:cornerRadius="4dp"
-        app:backgroundTint="@color/dragonBall"
-        android:text="@string/login_button_loggin"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        app:elevation="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tiLayoutPassword" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiEmail"
+                style="@style/LoginTextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiLayoutPassword"
+            style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_hint_password"
+            android:textColorHint="@color/gray"
+            app:boxStrokeColor="@color/text_input_login_selector"
+
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/ic_lock"
+            app:hintTextColor="@color/dragonBall"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tiLayoutEmail"
+            app:startIconDrawable="@drawable/ic_lock">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiPassword"
+                style="@style/LoginTextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogin"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="6dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/login_button_loggin"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:backgroundTint="@color/dragonBall"
+            app:cornerRadius="4dp"
+            app:elevation="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tiLayoutPassword" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

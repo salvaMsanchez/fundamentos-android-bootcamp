@@ -11,6 +11,7 @@ import com.example.dragonballappfundamentos.domain.extensions.loseFocusAfterActi
 import com.example.dragonballappfundamentos.domain.extensions.onTextChanged
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -45,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
     private fun updateUI(viewState: LoginViewState) {
         binding.tiEmail.error = if (viewState.isValidEmail) null else getString(R.string.login_error_email)
         binding.tiPassword.error = if (viewState.isValidPassword) null else getString(R.string.login_error_password)
+        binding.pbLoginLoading.isVisible = viewState.isLoading
     }
 
     private fun initListeners() {

@@ -3,8 +3,10 @@ package com.example.dragonballappfundamentos.ui.login
 import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 class LoginActivityViewModel: ViewModel() {
 
@@ -25,6 +27,9 @@ class LoginActivityViewModel: ViewModel() {
 
     private fun loginUser(email: String, password: String) {
         Log.i("SALVA", "$email & $password")
+        viewModelScope.launch {
+            _viewState.value = LoginViewState(isLoading = true)
+        }
     }
 
     fun onFieldsChanged(email: String, password: String) {
