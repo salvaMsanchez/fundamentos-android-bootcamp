@@ -6,5 +6,6 @@
 
     <color name="dragonBall">#DE6F2B</color>
     <color name="mainBackground">#171717</color>
+    <color name="item_character_defeated">#80171717</color>
     <color name="gray">#6B6B6B</color>
 </resources>
