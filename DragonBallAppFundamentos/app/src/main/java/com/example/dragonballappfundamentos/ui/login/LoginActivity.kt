@@ -17,6 +17,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.example.dragonballappfundamentos.data.local.SharedPreferencesService
 import com.example.dragonballappfundamentos.ui.home.HomeActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -30,6 +31,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btnLogin.isVisible = false
 
         initUI()
     }
@@ -51,6 +54,12 @@ class LoginActivity : AppCompatActivity() {
         binding.tiEmail.error = if (isValidEmail) null else getString(R.string.login_error_email)
         binding.tiPassword.error = if (isValidPassword) null else getString(R.string.login_error_password)
 
+        val emailText = binding.tiEmail.text
+        val passwordText = binding.tiPassword.text
+        if (emailText != null && passwordText != null) {
+            binding.btnLogin.isVisible = isValidEmail && isValidPassword && emailText.isNotEmpty() && passwordText.isNotEmpty()
+        }
+
 
         //binding.tiEmail.error = if (viewState.isValidEmail) null else getString(R.string.login_error_email)
         //binding.tiPassword.error = if (viewState.isValidPassword) null else getString(R.string.login_error_password)
@@ -59,15 +68,24 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateUI(viewState: LoginViewState) {
         when (viewState) {
-            is LoginViewState.Idle -> idle()
+            is LoginViewState.Error -> loginError(viewState.errorMessage)
             is LoginViewState.Loading -> showLoading(viewState.loading)
             is LoginViewState.ValidCredentials -> controlCredentialsValidation(viewState.isValidEmail, viewState.isValidPassword)
             is LoginViewState.AccessCompleted -> navigateToHome(viewState.token)
         }
     }
 
-    private fun idle() {
+    private fun loginError(errorMessage: String) {
+        showAuthenticationFailedDialog(errorMessage)
+    }
 
+    private fun showAuthenticationFailedDialog(errorMessage: String) {
+        MaterialAlertDialogBuilder(this).apply {
+            setTitle(errorMessage)
+            setMessage("Las credenciales proporcionadas son incorrectas. Por favor, verifica tu correo electrónico y contraseña e inténtalo nuevamente.")
+            setPositiveButton("Ok", null)
+            show()
+        }
     }
 
     private fun showLoading(loading: Boolean) {

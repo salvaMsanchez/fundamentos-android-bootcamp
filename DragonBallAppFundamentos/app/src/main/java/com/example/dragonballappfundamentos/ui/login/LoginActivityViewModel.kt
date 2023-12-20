@@ -39,6 +39,8 @@ class LoginActivityViewModel(): ViewModel() {
                 _viewState.value = LoginViewState.Loading(false)
             } else {
                 Log.i("SALVA", "ERROR EN LA LLAMADA")
+                _viewState.value = LoginViewState.Loading(false)
+                _viewState.value = LoginViewState.Error("Autenticación fallida")
             }
         }
     }
