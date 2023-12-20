@@ -147,6 +147,7 @@ Sorpresa fue la mía cuando la implementación de las animaciones Lottie en Watc
 * En el HomeActivity mostramos el primer fragment y cuando se pulse en una celda, navgeamos al siguiente fragment.
 * Meter Toast o Dialog cuando se recibe error en la llaamda del login, es decir, cuando las credenciales no son correctas.
 * Añadir SharedPreferences.
+* PROBLEMA: Hablar sobre que he guardado el token en SharedPreferences, aunque es muy mala práctica, y que he usado un Object como clase a la que acceder desde cualquier lugar a modo de Singleton para guardar los datos en SharedPreferences. He querido hacer el guardado del token en SharedPreferences desde la propia clase APIClient con una varibale de acceso personalizado (get y set), pero me ha resultado muy complicado al necesitar el contexto. Intenté pasarle el contexto al APIClient, pero al llamarlo desde el ViewModel, volvía a necesitar en este el contexto, lo cual es una práctica muy poco recomendado ya que puede haber fugas de memoria (memory leaks).
 
 ---
 

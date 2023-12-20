@@ -1,5 +1,7 @@
 package com.example.dragonballappfundamentos.ui.login
 
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
@@ -13,6 +15,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import com.example.dragonballappfundamentos.ui.home.HomeActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -43,10 +46,31 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun controlCredentialsValidation(isValidEmail: Boolean, isValidPassword: Boolean) {
+        binding.tiEmail.error = if (isValidEmail) null else getString(R.string.login_error_email)
+        binding.tiPassword.error = if (isValidPassword) null else getString(R.string.login_error_password)
+
+
+        //binding.tiEmail.error = if (viewState.isValidEmail) null else getString(R.string.login_error_email)
+        //binding.tiPassword.error = if (viewState.isValidPassword) null else getString(R.string.login_error_password)
+        //binding.pbLoginLoading.isVisible = viewState.isLoading
+    }
+
     private fun updateUI(viewState: LoginViewState) {
-        binding.tiEmail.error = if (viewState.isValidEmail) null else getString(R.string.login_error_email)
-        binding.tiPassword.error = if (viewState.isValidPassword) null else getString(R.string.login_error_password)
-        binding.pbLoginLoading.isVisible = viewState.isLoading
+        when (viewState) {
+            is LoginViewState.Idle -> idle()
+            is LoginViewState.Loading -> showLoading(viewState.loading)
+            is LoginViewState.ValidCredentials -> controlCredentialsValidation(viewState.isValidEmail, viewState.isValidPassword)
+            is LoginViewState.AccessCompleted -> navigateToHome(viewState.token)
+        }
+    }
+
+    private fun idle() {
+
+    }
+
+    private fun showLoading(loading: Boolean) {
+        binding.pbLoginLoading.isVisible = loading
     }
 
     private fun initListeners() {
@@ -64,6 +88,12 @@ class LoginActivity : AppCompatActivity() {
                 binding.tiPassword.text.toString()
             )
         }
+    }
+
+    private fun navigateToHome(token: String) {
+        Log.i("SALVA", "El token es $token")
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
     }
 
     private fun onFieldChanged(hasFocus: Boolean = false) {

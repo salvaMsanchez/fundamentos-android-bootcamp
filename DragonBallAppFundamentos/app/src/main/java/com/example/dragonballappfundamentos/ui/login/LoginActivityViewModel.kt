@@ -1,20 +1,25 @@
 package com.example.dragonballappfundamentos.ui.login
 
+import android.content.Context
 import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.dragonballappfundamentos.data.network.APIClient
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class LoginActivityViewModel: ViewModel() {
+class LoginActivityViewModel(): ViewModel() {
 
     private companion object {
         const val MIN_PASSWORD_LENGTH = 3
     }
 
-    private val _viewState = MutableStateFlow(LoginViewState())
+    private val apiClient = APIClient()
+
+    private val _viewState = MutableStateFlow<LoginViewState>(LoginViewState.Idle())
     val viewState: StateFlow<LoginViewState> = _viewState
 
     fun onLoginSelected(email: String, password: String) {
@@ -27,16 +32,18 @@ class LoginActivityViewModel: ViewModel() {
 
     private fun loginUser(email: String, password: String) {
         Log.i("SALVA", "$email & $password")
-        viewModelScope.launch {
-            _viewState.value = LoginViewState(isLoading = true)
+        viewModelScope.launch(Dispatchers.IO) {
+            _viewState.value = LoginViewState.Loading(true)
+            if (apiClient.login(email, password)) {
+                _viewState.value = LoginViewState.AccessCompleted(apiClient.getToken())
+            } else {
+                Log.i("SALVA", "ERROR EN LA LLAMADA")
+            }
         }
     }
 
     fun onFieldsChanged(email: String, password: String) {
-        _viewState.value = LoginViewState(
-            isValidEmail = isValidEmail(email),
-            isValidPassword = isValidPassword(password)
-        )
+        _viewState.value = LoginViewState.ValidCredentials(isValidEmail(email), isValidPassword(password))
     }
 
     private fun isValidEmail(email: String) =

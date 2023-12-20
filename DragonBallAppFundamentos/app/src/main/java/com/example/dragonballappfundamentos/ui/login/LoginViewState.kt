@@ -1,7 +1,8 @@
 package com.example.dragonballappfundamentos.ui.login
 
-data class LoginViewState(
-    val isLoading: Boolean = false,
-    val isValidEmail: Boolean = true,
-    val isValidPassword: Boolean = true
-)
+sealed class LoginViewState {
+    class Idle: LoginViewState()
+    class Loading(val loading: Boolean): LoginViewState()
+    class ValidCredentials(val isValidEmail: Boolean, val isValidPassword: Boolean): LoginViewState()
+    class AccessCompleted(val token: String): LoginViewState()
+}
