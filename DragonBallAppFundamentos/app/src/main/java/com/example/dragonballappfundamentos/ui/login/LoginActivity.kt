@@ -15,6 +15,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import com.example.dragonballappfundamentos.data.local.SharedPreferencesService
 import com.example.dragonballappfundamentos.ui.home.HomeActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -92,6 +93,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun navigateToHome(token: String) {
         Log.i("SALVA", "El token es $token")
+        SharedPreferencesService.saveToken(this, token = token)
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
     }

@@ -19,7 +19,7 @@ class LoginActivityViewModel(): ViewModel() {
 
     private val apiClient = APIClient()
 
-    private val _viewState = MutableStateFlow<LoginViewState>(LoginViewState.Idle())
+    private val _viewState = MutableStateFlow<LoginViewState>(LoginViewState.Loading(false))
     val viewState: StateFlow<LoginViewState> = _viewState
 
     fun onLoginSelected(email: String, password: String) {
@@ -36,6 +36,7 @@ class LoginActivityViewModel(): ViewModel() {
             _viewState.value = LoginViewState.Loading(true)
             if (apiClient.login(email, password)) {
                 _viewState.value = LoginViewState.AccessCompleted(apiClient.getToken())
+                _viewState.value = LoginViewState.Loading(false)
             } else {
                 Log.i("SALVA", "ERROR EN LA LLAMADA")
             }

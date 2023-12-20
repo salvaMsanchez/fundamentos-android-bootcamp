@@ -2,7 +2,7 @@ package com.example.dragonballappfundamentos.data.local
 
 import android.content.Context
 
-object SharedPreferences {
+object SharedPreferencesService {
 
     private const val PREFS_NAME = "DragonBallFundamentosAndroid"
     private const val TOKEN_KEY = "tokenKey"

@@ -1,7 +1,5 @@
 package com.example.dragonballappfundamentos.data.network
 
-import android.content.Context
-import com.example.dragonballappfundamentos.data.local.SharedPreferences
 import okhttp3.Credentials
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
