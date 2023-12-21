@@ -11,6 +11,12 @@ class CharactersAdapter(
     private val onItemSelected: (String) -> Unit
 ):
     RecyclerView.Adapter<CharactersViewHolder>() {
+
+    fun updateList(characters: List<Character>) {
+        this.characters = characters
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder {
         return CharactersViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_character, parent, false)

@@ -1,5 +1,9 @@
 package com.example.dragonballappfundamentos.data.network
 
+import com.example.dragonballappfundamentos.data.local.SharedPreferencesService
+import com.example.dragonballappfundamentos.domain.models.CharacterDTO
+import com.example.dragonballappfundamentos.ui.characters.model.Character
+import com.google.gson.Gson
 import okhttp3.Credentials
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
@@ -10,6 +14,7 @@ class APIClient() {
     companion object {
         private const val BASE_URL = "https://dragonball.keepcoding.education/api/"
         private const val LOGIN_EXTENSION = "auth/login"
+        private const val GET_CHARACTERS_EXTENSION = "heros/all"
     }
 
     private var token = ""
@@ -41,4 +46,31 @@ class APIClient() {
         }
     }
 
+    fun getCharacters(token: String): List<Character> {
+        val client = OkHttpClient()
+        val url = "${BASE_URL}${GET_CHARACTERS_EXTENSION}"
+        val formBody = FormBody.Builder()
+            .add("name", "")
+            .build()
+        val request = Request.Builder()
+            .url(url)
+            .addHeader("Authorization", "Bearer $token")
+            .post(formBody)
+            .build()
+        val call = client.newCall(request)
+        val response = call.execute()
+        return if (response.isSuccessful) {
+            response.body?.let {
+                val charactersDtoArray: Array<CharacterDTO> =
+                    Gson().fromJson(it.string(), Array<CharacterDTO>::class.java)
+                val characterArray = charactersDtoArray.map { characterDto ->
+                    Character(characterDto.name, characterDto.photo, 100, 100, 0)
+                }
+                characterArray.toList()
+            }
+            emptyList()
+        } else {
+            emptyList()
+        }
+    }
 }
