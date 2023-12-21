@@ -32,8 +32,8 @@ class LoginActivityViewModel(): ViewModel() {
 
     private fun loginUser(email: String, password: String) {
         Log.i("SALVA", "$email & $password")
+        _viewState.value = LoginViewState.Loading(true)
         viewModelScope.launch(Dispatchers.IO) {
-            _viewState.value = LoginViewState.Loading(true)
             if (apiClient.login(email, password)) {
                 _viewState.value = LoginViewState.AccessCompleted(apiClient.getToken())
                 _viewState.value = LoginViewState.Loading(false)

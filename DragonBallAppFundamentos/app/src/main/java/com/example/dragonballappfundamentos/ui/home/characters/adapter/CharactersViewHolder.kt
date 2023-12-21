@@ -1,11 +1,11 @@
-package com.example.dragonballappfundamentos.ui.characters.adapter
+package com.example.dragonballappfundamentos.ui.home.characters.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dragonballappfundamentos.R
 import com.example.dragonballappfundamentos.databinding.ItemCharacterBinding
-import com.example.dragonballappfundamentos.ui.characters.model.Character
+import com.example.dragonballappfundamentos.ui.home.characters.model.Character
 
 class CharactersViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
@@ -13,6 +13,8 @@ class CharactersViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
     fun bind(character: Character, onItemSelected: (String) -> Unit) {
         binding.tvCharacterName.text = character.name
+        binding.pbCharacterLife.progress = character.currentLife
+        binding.tvCharacterHPStats.text = "${character.currentLife}/${character.maxLife}"
         Glide
             .with(binding.root)
             .load(character.photo)

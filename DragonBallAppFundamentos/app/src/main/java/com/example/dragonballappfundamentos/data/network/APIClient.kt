@@ -1,8 +1,9 @@
 package com.example.dragonballappfundamentos.data.network
 
+import android.util.Log
 import com.example.dragonballappfundamentos.data.local.SharedPreferencesService
 import com.example.dragonballappfundamentos.domain.models.CharacterDTO
-import com.example.dragonballappfundamentos.ui.characters.model.Character
+import com.example.dragonballappfundamentos.ui.home.characters.model.Character
 import com.google.gson.Gson
 import okhttp3.Credentials
 import okhttp3.FormBody
@@ -59,18 +60,21 @@ class APIClient() {
             .build()
         val call = client.newCall(request)
         val response = call.execute()
-        return if (response.isSuccessful) {
+        if (response.isSuccessful) {
             response.body?.let {
                 val charactersDtoArray: Array<CharacterDTO> =
                     Gson().fromJson(it.string(), Array<CharacterDTO>::class.java)
                 val characterArray = charactersDtoArray.map { characterDto ->
                     Character(characterDto.name, characterDto.photo, 100, 100, 0)
                 }
-                characterArray.toList()
+                val characterMutableList = characterArray.toMutableList()
+                characterMutableList.removeLast()
+                Log.i("SALVA", "La lista obtenida es ${characterArray.toList()}")
+                return characterMutableList.toList()
             }
-            emptyList()
+            return emptyList()
         } else {
-            emptyList()
+            return emptyList()
         }
     }
 }

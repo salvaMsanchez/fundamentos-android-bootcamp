@@ -1,10 +1,10 @@
-package com.example.dragonballappfundamentos.ui.characters.adapter
+package com.example.dragonballappfundamentos.ui.home.characters.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dragonballappfundamentos.R
-import com.example.dragonballappfundamentos.ui.characters.model.Character
+import com.example.dragonballappfundamentos.ui.home.characters.model.Character
 
 class CharactersAdapter(
     var characters: List<Character> = emptyList(),

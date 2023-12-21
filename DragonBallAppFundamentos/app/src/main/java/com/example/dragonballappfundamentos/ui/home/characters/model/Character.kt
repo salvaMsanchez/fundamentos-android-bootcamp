@@ -1,4 +1,4 @@
-package com.example.dragonballappfundamentos.ui.characters.model
+package com.example.dragonballappfundamentos.ui.home.characters.model
 
 data class Character(
     val name: String,

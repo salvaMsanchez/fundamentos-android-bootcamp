@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import com.example.dragonballappfundamentos.R
 import com.example.dragonballappfundamentos.databinding.ActivityHomeBinding
-import com.example.dragonballappfundamentos.ui.characters.CharactersFragment
+import com.example.dragonballappfundamentos.ui.home.characters.CharactersFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class HomeActivity : AppCompatActivity() {

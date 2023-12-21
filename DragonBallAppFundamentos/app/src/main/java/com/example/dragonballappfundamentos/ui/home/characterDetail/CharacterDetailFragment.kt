@@ -1,4 +1,4 @@
-package com.example.dragonballappfundamentos.ui.characterDetail
+package com.example.dragonballappfundamentos.ui.home.characterDetail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
