@@ -120,6 +120,7 @@
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="16sp"
+            android:visibility="invisible"
             app:backgroundTint="@color/dragonBall"
             app:cornerRadius="4dp"
             app:elevation="20dp"

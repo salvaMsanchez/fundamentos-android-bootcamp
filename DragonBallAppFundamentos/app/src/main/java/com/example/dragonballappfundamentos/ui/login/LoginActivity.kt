@@ -29,12 +29,19 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        binding.btnLogin.isVisible = false
+        if (SharedPreferencesService.getToken(this) != "No Token") {
+            Log.i("SALVA", "Navegando al Home directamente sin pasar por Login")
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        } else {
+            Log.i("SALVA", "Navegando al Login")
+            binding = ActivityLoginBinding.inflate(layoutInflater)
+            setContentView(binding.root)
 
-        initUI()
+            initUI()
+        }
     }
 
     private fun initUI() {
