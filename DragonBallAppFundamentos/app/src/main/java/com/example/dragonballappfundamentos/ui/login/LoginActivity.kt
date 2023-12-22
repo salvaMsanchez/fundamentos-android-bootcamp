@@ -114,6 +114,7 @@ class LoginActivity : AppCompatActivity() {
         SharedPreferencesService.saveToken(this, token = token)
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     private fun onFieldChanged(hasFocus: Boolean = false) {
