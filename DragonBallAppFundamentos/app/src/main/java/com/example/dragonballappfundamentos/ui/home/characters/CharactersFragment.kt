@@ -1,5 +1,6 @@
 package com.example.dragonballappfundamentos.ui.home.characters
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,10 +13,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dragonballappfundamentos.data.local.SharedPreferencesService
 import com.example.dragonballappfundamentos.databinding.FragmentCharactersBinding
+import com.example.dragonballappfundamentos.ui.home.HomeActivity
 import com.example.dragonballappfundamentos.ui.home.HomeViewState
 import com.example.dragonballappfundamentos.ui.home.characters.adapter.CharactersAdapter
 import com.example.dragonballappfundamentos.ui.home.characters.model.Character
 import com.example.dragonballappfundamentos.ui.home.sharedviewmodel.SharedViewModel
+import com.example.dragonballappfundamentos.ui.login.LoginActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -109,7 +112,38 @@ class CharactersFragment : Fragment() {
     }
 
     private fun initListeners() {
+        binding.ivRecoverLife.setOnClickListener {
+            // Todooooo!!
+        }
+        binding.ivLogout.setOnClickListener {
+            showLogoutDialog()
+        }
+    }
 
+    private fun showLogoutDialog() {
+        MaterialAlertDialogBuilder(binding.root.context).apply {
+            setTitle("¿Estás seguro?")
+            setMessage("¿Quieres cerrar la sesión en la aplicación?")
+            setPositiveButton("Sí") { _, _ -> logout() }
+            setNegativeButton("No", null)
+            show()
+        }
+    }
+
+    private fun logout() {
+        removeDataSaved()
+        goToLogin()
+    }
+
+    private fun removeDataSaved() {
+        SharedPreferencesService.deleteCharacters(binding.root.context)
+        SharedPreferencesService.deleteToken(binding.root.context)
+    }
+
+    private fun goToLogin() {
+        val intent = Intent(binding.root.context, LoginActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
     }
 
     private fun goToDetail(characterName: String) {

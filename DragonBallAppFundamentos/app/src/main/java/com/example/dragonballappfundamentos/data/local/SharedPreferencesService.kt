@@ -21,6 +21,14 @@ object SharedPreferencesService {
         }
     }
 
+    fun deleteCharacters(context: Context, key: String = CHARACTERS_KEY) {
+        val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        with (sharedPref.edit()) {
+            remove(key)
+            commit()
+        }
+    }
+
     fun getToken(context: Context, key: String = TOKEN_KEY, defaultValue: String = "No Token"): String {
         val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         return sharedPref.getString(key, defaultValue) ?: defaultValue
