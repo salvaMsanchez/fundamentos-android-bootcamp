@@ -42,7 +42,13 @@ class CharactersFragment : Fragment() {
 
         initUI()
 
-        sharedViewModel.onViewAppear(SharedPreferencesService.getToken(binding.root.context))
+        if (SharedPreferencesService.getCharacters(binding.root.context) != "No Characters") {
+            Log.i("Salva", "Datos recuperados desde SharedPreferences")
+            sharedViewModel.onViewAppearWithDataSaved(SharedPreferencesService.getCharacters(binding.root.context))
+        } else {
+            Log.i("Salva", "Datos recuperados desde la API")
+            sharedViewModel.onViewAppearWithoutDataSaved(SharedPreferencesService.getToken(binding.root.context))
+        }
     }
 
     private fun initUI() {
@@ -67,6 +73,7 @@ class CharactersFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.Main) {
             sharedViewModel.characters.collect { characters ->
                 updateAdapter(characters)
+                SharedPreferencesService.saveCharacters(binding.root.context, characters = sharedViewModel.charactersRaw)
             }
         }
     }

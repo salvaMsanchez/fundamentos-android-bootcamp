@@ -142,6 +142,8 @@ Sorpresa fue la mía cuando la implementación de las animaciones Lottie en Watc
 
 # Apuntes
 
+* Añadir SplashActivity o RootActivity, pero que solo tenga la función de encargarse de decidir si va al login o al home en función de tener o no token. Investigar si se puede hacer una LaunchScreen que pueda hacer esa decisión.
+
 * Hacer SharedViewModel que realice la llamada y guarde los characters en variable. Así, podremos cargarlos en el RecyclerView. Luego, al pulsar en una celda, podemos pasar la posición en vez del nombre y así mostrar el personaje seleccionado.
 * SharedViewModel -> Detección de cambios en distintos fragments. Tendríamos dos fragments, un sharedViewModel donde tenemos una variable que sería la vida que va cambiando y a la que estarían suscritos los dos fragments, así cuando cambia en uno, cambia en el otro.
 * SingleActivity
