@@ -10,7 +10,7 @@
     app:cardElevation="8dp"
     app:strokeWidth="3dp"
     app:strokeColor="@color/dragonBall"
-    app:cardBackgroundColor="@color/mainBackground">
+    app:cardBackgroundColor="@color/item_background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -128,7 +128,7 @@
                         android:id="@+id/ivCharacterDefeated"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/ic_hospital"
+                        android:src="@drawable/ic_healing"
                         app:tint="@color/red"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

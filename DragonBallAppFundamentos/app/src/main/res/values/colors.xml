@@ -4,8 +4,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
 
+    <color name="toolbar">#181818</color>
     <color name="dragonBall">#DE6F2B</color>
-    <color name="mainBackground">#171717</color>
+    <color name="mainBackground">#1f1f1f</color>
+    <color name="item_background">#363843</color>
     <color name="item_character_defeated">#80171717</color>
     <color name="gray">#6B6B6B</color>
 </resources>

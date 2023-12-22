@@ -104,7 +104,7 @@ class CharactersFragment : Fragment() {
 
     private fun showLoading(loading: Boolean) {
         binding.pbCharactersLoading.visibility = View.GONE
-        binding.tvCharactersTitle.isVisible = !loading
+        binding.charactersToolbar.isVisible = !loading
         binding.rvCharacters.isVisible = !loading
     }
 
