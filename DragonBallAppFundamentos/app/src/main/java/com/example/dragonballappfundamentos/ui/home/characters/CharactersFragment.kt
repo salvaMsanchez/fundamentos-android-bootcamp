@@ -16,6 +16,7 @@ import com.example.dragonballappfundamentos.ui.home.HomeViewState
 import com.example.dragonballappfundamentos.ui.home.characters.adapter.CharactersAdapter
 import com.example.dragonballappfundamentos.ui.home.characters.model.Character
 import com.example.dragonballappfundamentos.ui.home.sharedviewmodel.SharedViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -76,8 +77,21 @@ class CharactersFragment : Fragment() {
 
     private fun updateUI(viewState: HomeViewState) {
         when(viewState) {
-            is HomeViewState.Error -> Log.i("SALVA", "HomeViewState.Error")
+            is HomeViewState.Error -> loadCharactersError(viewState.errorMessage)
             is HomeViewState.Loading -> showLoading(viewState.loading)
+        }
+    }
+
+    private fun loadCharactersError(errorMessage: String) {
+        showLoadCharactersFailedDialog(errorMessage)
+    }
+
+    private fun showLoadCharactersFailedDialog(errorMessage: String) {
+        MaterialAlertDialogBuilder(binding.root.context).apply {
+            setTitle(errorMessage)
+            setMessage("Lo siento. No se han podido recuperar los datos desde el servidor. Reinicia la aplicación o vuelva a entrar en otro momento.")
+            setPositiveButton("Ok", null)
+            show()
         }
     }
 
