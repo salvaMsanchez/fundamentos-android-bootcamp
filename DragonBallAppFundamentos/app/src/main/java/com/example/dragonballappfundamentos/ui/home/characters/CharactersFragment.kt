@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -76,8 +77,14 @@ class CharactersFragment : Fragment() {
     private fun updateUI(viewState: HomeViewState) {
         when(viewState) {
             is HomeViewState.Error -> Log.i("SALVA", "HomeViewState.Error")
-            is HomeViewState.Loading -> Log.i("SALVA", "HomeViewState.Loading")
+            is HomeViewState.Loading -> showLoading(viewState.loading)
         }
+    }
+
+    private fun showLoading(loading: Boolean) {
+        binding.pbCharactersLoading.visibility = View.GONE
+        binding.tvCharactersTitle.isVisible = !loading
+        binding.rvCharacters.isVisible = !loading
     }
 
     private fun initListeners() {
