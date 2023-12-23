@@ -108,6 +108,16 @@ class SharedViewModel: ViewModel() {
         }
     }
 
+    fun addCharacterTimesSelected(characterPosition: Int) {
+        val characterSelected: Character = _characters.value[characterPosition]
+        val characterUpdated: Character = Character(characterSelected.name, characterSelected.photo, characterSelected.maxLife, characterSelected.currentLife, characterSelected.timesSelected + 1)
+        _characters.value = _characters.value.toMutableList().apply {
+            if (characterPosition in 0 until size) {
+                set(characterPosition, characterUpdated)
+            }
+        }
+    }
+
     fun setCharacterDefeatedToFalse() {
         _characterDefeated.value = false
     }

@@ -59,6 +59,7 @@ class CharacterDetailFragment : Fragment(), OnBackPressedListenerCharacterDetail
         initComponents()
         initListeners()
         initObservers()
+        addCharacterTimesSelected()
     }
 
     private fun initComponents() {
@@ -118,6 +119,12 @@ class CharacterDetailFragment : Fragment(), OnBackPressedListenerCharacterDetail
         }
     }
 
+    private fun addCharacterTimesSelected() {
+        arguments?.getInt(ARG_CHARACTER_POSITION)?.let { characterPosition ->
+            sharedViewModel.addCharacterTimesSelected(characterPosition)
+        }
+    }
+
     private fun showCharacterDefeatedDialog() {
         MaterialAlertDialogBuilder(binding.root.context).apply {
             setTitle("Personaje derrotado")
@@ -128,8 +135,13 @@ class CharacterDetailFragment : Fragment(), OnBackPressedListenerCharacterDetail
     }
 
     private fun showToast(character: Character) {
-        val message: String = "Has seleccionado ${character.timesSelected} veces a ${character.name}"
-        Toast.makeText(binding.root.context, message, Toast.LENGTH_SHORT).show()
+        if (character.timesSelected == 1) {
+            val message: String = "Has seleccionado ${character.timesSelected} vez a ${character.name}"
+            Toast.makeText(binding.root.context, message, Toast.LENGTH_SHORT).show()
+        } else {
+            val message: String = "Has seleccionado ${character.timesSelected} veces a ${character.name}"
+            Toast.makeText(binding.root.context, message, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun backDueToDefeatedCharacter() {
@@ -138,7 +150,6 @@ class CharacterDetailFragment : Fragment(), OnBackPressedListenerCharacterDetail
     }
 
     override fun onBackPressed() {
-        Log.i("SALVA", "PULSANDO ATRÁS")
         if (requireActivity().supportFragmentManager.backStackEntryCount > 0) {
             requireActivity().supportFragmentManager.popBackStack()
         } else {
