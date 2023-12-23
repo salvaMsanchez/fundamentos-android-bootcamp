@@ -8,7 +8,7 @@ import com.example.dragonballappfundamentos.ui.home.characters.model.Character
 
 class CharactersAdapter(
     var characters: List<Character> = emptyList(),
-    private val onItemSelected: (String) -> Unit
+    private val onItemSelected: (Int) -> Unit
 ):
     RecyclerView.Adapter<CharactersViewHolder>() {
 
@@ -24,7 +24,7 @@ class CharactersAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: CharactersViewHolder, position: Int) {
-        viewHolder.bind(characters[position], onItemSelected)
+        viewHolder.bind(characters[position], position, onItemSelected)
     }
 
     override fun getItemCount(): Int = characters.size

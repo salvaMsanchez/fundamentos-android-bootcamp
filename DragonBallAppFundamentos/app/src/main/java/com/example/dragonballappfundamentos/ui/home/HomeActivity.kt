@@ -5,12 +5,13 @@ import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import com.example.dragonballappfundamentos.R
 import com.example.dragonballappfundamentos.databinding.ActivityHomeBinding
+import com.example.dragonballappfundamentos.domain.interfaces.OnBackPressedListenerCharacterDetail
 import com.example.dragonballappfundamentos.ui.home.characters.CharactersFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class HomeActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityHomeBinding
+    lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +25,13 @@ class HomeActivity : AppCompatActivity() {
 
     private val onBackPressedCallback = object: OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            showFinishDialog()
+            val currentFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
+
+            if (currentFragment is OnBackPressedListenerCharacterDetail) {
+                (currentFragment as OnBackPressedListenerCharacterDetail).onBackPressed()
+            } else {
+                showFinishDialog()
+            }
         }
     }
 

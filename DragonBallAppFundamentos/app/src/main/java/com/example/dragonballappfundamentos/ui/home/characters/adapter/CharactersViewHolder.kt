@@ -11,7 +11,7 @@ class CharactersViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
     private var binding = ItemCharacterBinding.bind(view)
 
-    fun bind(character: Character, onItemSelected: (String) -> Unit) {
+    fun bind(character: Character, position: Int, onItemSelected: (Int) -> Unit) {
         binding.tvCharacterName.text = character.name
         binding.pbCharacterLife.progress = character.currentLife
         binding.tvCharacterHPStats.text = "${character.currentLife}/${character.maxLife}"
@@ -21,6 +21,6 @@ class CharactersViewHolder(view: View): RecyclerView.ViewHolder(view) {
             .centerCrop()
             .placeholder(R.drawable.ic_insert_photo)
             .into(binding.ivCharacter)
-        binding.root.setOnClickListener { onItemSelected(character.name) }
+        binding.root.setOnClickListener { onItemSelected(position) }
     }
 }

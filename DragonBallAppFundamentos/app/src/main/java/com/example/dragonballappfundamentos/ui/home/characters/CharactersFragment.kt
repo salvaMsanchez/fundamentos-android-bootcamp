@@ -11,10 +11,12 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dragonballappfundamentos.R
 import com.example.dragonballappfundamentos.data.local.SharedPreferencesService
 import com.example.dragonballappfundamentos.databinding.FragmentCharactersBinding
 import com.example.dragonballappfundamentos.ui.home.HomeActivity
 import com.example.dragonballappfundamentos.ui.home.HomeViewState
+import com.example.dragonballappfundamentos.ui.home.characterDetail.CharacterDetailFragment
 import com.example.dragonballappfundamentos.ui.home.characters.adapter.CharactersAdapter
 import com.example.dragonballappfundamentos.ui.home.characters.model.Character
 import com.example.dragonballappfundamentos.ui.home.sharedviewmodel.SharedViewModel
@@ -61,7 +63,7 @@ class CharactersFragment : Fragment() {
     }
 
     private fun configureRecyclerView() {
-        adapter = CharactersAdapter { characterName -> goToDetail(characterName) }
+        adapter = CharactersAdapter { characterPosition -> goToDetail(characterPosition) }
         binding.rvCharacters.setHasFixedSize(true)
         binding.rvCharacters.layoutManager = LinearLayoutManager(binding.root.context)
         binding.rvCharacters.adapter = adapter
@@ -106,6 +108,7 @@ class CharactersFragment : Fragment() {
     }
 
     private fun showLoading(loading: Boolean) {
+        Log.i("Salva", "El estado del loading es $loading")
         binding.pbCharactersLoading.visibility = View.GONE
         binding.charactersToolbar.isVisible = !loading
         binding.rvCharacters.isVisible = !loading
@@ -146,7 +149,14 @@ class CharactersFragment : Fragment() {
         requireActivity().finish()
     }
 
-    private fun goToDetail(characterName: String) {
+    private fun goToDetail(characterPosition: Int) {
+        val characterDetailFragment = CharacterDetailFragment.newInstance(characterPosition)
+        val bindingHomeActivity = (requireActivity() as HomeActivity).binding
 
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(bindingHomeActivity.fragmentContainerView.id, characterDetailFragment)
+            .addToBackStack(null)
+            .commit()
     }
 }

@@ -27,6 +27,7 @@ class SharedViewModel: ViewModel() {
         get() = Gson().toJson(_characters.value)
 
     fun onViewAppearWithoutDataSaved(token: String) {
+        _viewState.value = HomeViewState.Loading(true)
         viewModelScope.launch(Dispatchers.IO) {
             val charactersReceived: List<Character> = apiClient.getCharacters(token)
             Log.i("SALVA", "$charactersReceived")
@@ -41,6 +42,7 @@ class SharedViewModel: ViewModel() {
     }
 
     fun onViewAppearWithDataSaved(characters: String) {
+        _viewState.value = HomeViewState.Loading(true)
         viewModelScope.launch(Dispatchers.IO) {
             val charactersSavedArray: Array<Character> = Gson().fromJson(characters, Array<Character>::class.java)
             _characters.value = charactersSavedArray.toList()
