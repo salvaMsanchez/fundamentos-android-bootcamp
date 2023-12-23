@@ -18,6 +18,7 @@ import com.example.dragonballappfundamentos.databinding.FragmentCharactersBindin
 import com.example.dragonballappfundamentos.domain.interfaces.OnBackPressedListenerCharacterDetail
 import com.example.dragonballappfundamentos.ui.home.characters.model.Character
 import com.example.dragonballappfundamentos.ui.home.sharedviewmodel.SharedViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -61,19 +62,17 @@ class CharacterDetailFragment : Fragment(), OnBackPressedListenerCharacterDetail
     }
 
     private fun initComponents() {
-        arguments?.getInt(ARG_CHARACTER_POSITION).let {
-            it?.let { characterPosition ->
-                val character: Character = sharedViewModel.characters.value[characterPosition]
-                Glide
-                    .with(binding.root)
-                    .load(character.photo)
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_insert_photo)
-                    .into(binding.ivCharacterDetail)
-                binding.tvCharacterHPStats.text = "${character.currentLife}/${character.maxLife}"
-                binding.tvCharacterDetailName.text = "${character.name}"
-                binding.pbCharacterDetailLife.progress = character.currentLife
-            }
+        arguments?.getInt(ARG_CHARACTER_POSITION)?.let { characterPosition ->
+            val character: Character = sharedViewModel.characters.value[characterPosition]
+            Glide
+                .with(binding.root)
+                .load(character.photo)
+                .centerCrop()
+                .placeholder(R.drawable.ic_insert_photo)
+                .into(binding.ivCharacterDetail)
+            binding.tvCharacterHPStats.text = "${character.currentLife}/${character.maxLife}"
+            binding.tvCharacterDetailName.text = "${character.name}"
+            binding.pbCharacterDetailLife.progress = character.currentLife
         }
     }
 
@@ -83,31 +82,59 @@ class CharacterDetailFragment : Fragment(), OnBackPressedListenerCharacterDetail
                 updateUI()
             }
         }
+        lifecycleScope.launch(Dispatchers.Main) {
+            sharedViewModel.characterDefeated.collect { characterDefeated ->
+                if (characterDefeated) {
+                    showCharacterDefeatedDialog()
+                }
+            }
+        }
     }
 
     private fun updateUI() {
-        arguments?.getInt(ARG_CHARACTER_POSITION).let {
-            it?.let { characterPosition ->
-                val character: Character = sharedViewModel.characters.value[characterPosition]
-                binding.tvCharacterHPStats.text = "${character.currentLife}/${character.maxLife}"
-            }
+        arguments?.getInt(ARG_CHARACTER_POSITION)?.let { characterPosition ->
+            val character: Character = sharedViewModel.characters.value[characterPosition]
+            binding.pbCharacterDetailLife.progress = character.currentLife
+            binding.tvCharacterHPStats.text = "${character.currentLife}/${character.maxLife}"
         }
     }
 
     private fun initListeners() {
         binding.btnTimesSelected.setOnClickListener {
-            showToast("Hola, este es un Toast sencillo en Android")
+            arguments?.getInt(ARG_CHARACTER_POSITION)?.let { characterPosition ->
+                val character: Character = sharedViewModel.characters.value[characterPosition]
+                showToast(character)
+            }
         }
         binding.fbHealCharacter.setOnClickListener {
-
+            arguments?.getInt(ARG_CHARACTER_POSITION)?.let { characterPosition ->
+                sharedViewModel.onHealButtonPressed(characterPosition)
+            }
         }
         binding.fbHitCharacter.setOnClickListener {
-
+            arguments?.getInt(ARG_CHARACTER_POSITION)?.let { characterPosition ->
+                sharedViewModel.onHitButtonPressed(characterPosition)
+            }
         }
     }
 
-    private fun showToast(message: String) {
+    private fun showCharacterDefeatedDialog() {
+        MaterialAlertDialogBuilder(binding.root.context).apply {
+            setTitle("Personaje derrotado")
+            setMessage("¡Tienes que entrenar más!")
+            setPositiveButton("OK") { _, _ -> backDueToDefeatedCharacter() }
+            show()
+        }
+    }
+
+    private fun showToast(character: Character) {
+        val message: String = "Has seleccionado ${character.timesSelected} veces a ${character.name}"
         Toast.makeText(binding.root.context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun backDueToDefeatedCharacter() {
+        onBackPressed()
+        sharedViewModel.setCharacterDefeatedToFalse()
     }
 
     override fun onBackPressed() {
