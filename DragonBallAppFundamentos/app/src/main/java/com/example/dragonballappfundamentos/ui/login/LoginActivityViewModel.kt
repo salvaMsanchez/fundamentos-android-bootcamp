@@ -1,7 +1,5 @@
 package com.example.dragonballappfundamentos.ui.login
 
-import android.content.Context
-import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

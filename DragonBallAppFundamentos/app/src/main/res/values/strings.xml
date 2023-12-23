@@ -20,7 +20,4 @@
     <string name="load_characters_failed">Lo siento. No se han podido recuperar los datos desde el servidor. Reinicia la aplicación o vuelva a entrar en otro momento.</string>
     <string name="character_defeated">Personaje derrotado</string>
     <string name="training_harder">¡Tienes que entrenar más!</string>
-
-
-    <string name="hello_blank_fragment">hello_blank_fragment</string>
 </resources>

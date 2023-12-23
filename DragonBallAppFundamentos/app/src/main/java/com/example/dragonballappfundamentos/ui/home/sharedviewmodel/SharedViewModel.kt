@@ -37,12 +37,10 @@ class SharedViewModel: ViewModel() {
         _viewState.value = HomeViewState.Loading(true)
         viewModelScope.launch(Dispatchers.IO) {
             val charactersReceived: List<Character> = apiClient.getCharacters(token)
-            Log.i("SALVA", "$charactersReceived")
             if (charactersReceived.isNotEmpty()) {
                 _characters.value = charactersReceived
                 _viewState.value = HomeViewState.Loading(false)
             } else {
-                Log.i("SALVA", "Error por aquí")
                 _viewState.value = HomeViewState.Error("Error con el servidor en la obtención de datos.")
             }
         }

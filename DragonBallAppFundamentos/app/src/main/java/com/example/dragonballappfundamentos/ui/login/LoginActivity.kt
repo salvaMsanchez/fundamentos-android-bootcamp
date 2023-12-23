@@ -1,17 +1,14 @@
 package com.example.dragonballappfundamentos.ui.login
 
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
-import androidx.core.widget.doOnTextChanged
 import com.example.dragonballappfundamentos.R
 import com.example.dragonballappfundamentos.databinding.ActivityLoginBinding
 import com.example.dragonballappfundamentos.domain.extensions.dismissKeyboard
 import com.example.dragonballappfundamentos.domain.extensions.loseFocusAfterAction
 import com.example.dragonballappfundamentos.domain.extensions.onTextChanged
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -19,7 +16,6 @@ import com.example.dragonballappfundamentos.data.local.SharedPreferencesService
 import com.example.dragonballappfundamentos.ui.home.HomeActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
