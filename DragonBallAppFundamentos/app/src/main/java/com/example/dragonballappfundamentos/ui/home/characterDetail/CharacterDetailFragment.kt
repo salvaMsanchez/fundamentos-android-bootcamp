@@ -1,26 +1,21 @@
 package com.example.dragonballappfundamentos.ui.home.characterDetail
 
 import android.os.Bundle
-import android.os.Message
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.dragonballappfundamentos.R
 import com.example.dragonballappfundamentos.databinding.FragmentCharacterDetailBinding
-import com.example.dragonballappfundamentos.databinding.FragmentCharactersBinding
 import com.example.dragonballappfundamentos.domain.interfaces.OnBackPressedListenerCharacterDetail
 import com.example.dragonballappfundamentos.ui.home.characters.model.Character
 import com.example.dragonballappfundamentos.ui.home.sharedviewmodel.SharedViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CharacterDetailFragment : Fragment(), OnBackPressedListenerCharacterDetail {

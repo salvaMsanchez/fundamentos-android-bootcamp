@@ -1,9 +1,7 @@
 package com.example.dragonballappfundamentos.ui.home.sharedviewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dragonballappfundamentos.data.local.SharedPreferencesService
 import com.example.dragonballappfundamentos.data.network.APIClient
 import com.example.dragonballappfundamentos.ui.home.HomeViewState
 import com.example.dragonballappfundamentos.ui.home.characters.model.Character

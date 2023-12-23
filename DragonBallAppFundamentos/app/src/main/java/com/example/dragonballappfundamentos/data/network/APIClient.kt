@@ -1,7 +1,6 @@
 package com.example.dragonballappfundamentos.data.network
 
 import android.util.Log
-import com.example.dragonballappfundamentos.data.local.SharedPreferencesService
 import com.example.dragonballappfundamentos.domain.models.CharacterDTO
 import com.example.dragonballappfundamentos.ui.home.characters.model.Character
 import com.google.gson.Gson
