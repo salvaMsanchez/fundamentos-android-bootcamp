@@ -38,7 +38,7 @@ class SharedViewModel: ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val charactersReceived: List<Character> = apiClient.getCharacters(token)
             if (charactersReceived.isNotEmpty()) {
-                _characters.value = charactersReceived
+                updateCharacters(charactersReceived)
                 _viewState.value = HomeViewState.Loading(false)
             } else {
                 _viewState.value = HomeViewState.Error("Error con el servidor en la obtención de datos.")
@@ -50,9 +50,13 @@ class SharedViewModel: ViewModel() {
         _viewState.value = HomeViewState.Loading(true)
         viewModelScope.launch(Dispatchers.IO) {
             val charactersSavedArray: Array<Character> = Gson().fromJson(characters, Array<Character>::class.java)
-            _characters.value = charactersSavedArray.toList()
+            updateCharacters(charactersSavedArray.toList())
             _viewState.value = HomeViewState.Loading(false)
         }
+    }
+
+    fun updateCharacters(newCharacters: List<Character>) {
+        _characters.value = newCharacters
     }
 
     fun onHealButtonPressed(characterPosition: Int) {
