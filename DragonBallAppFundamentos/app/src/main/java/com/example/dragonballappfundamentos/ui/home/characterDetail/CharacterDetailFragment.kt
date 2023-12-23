@@ -130,9 +130,9 @@ class CharacterDetailFragment : Fragment(), OnBackPressedListenerCharacterDetail
 
     private fun showCharacterDefeatedDialog() {
         MaterialAlertDialogBuilder(binding.root.context).apply {
-            setTitle("Personaje derrotado")
-            setMessage("¡Tienes que entrenar más!")
-            setPositiveButton("OK") { _, _ -> backDueToDefeatedCharacter() }
+            setTitle(getString(R.string.character_defeated))
+            setMessage(getString(R.string.training_harder))
+            setPositiveButton(getString(R.string.ok)) { _, _ -> backDueToDefeatedCharacter() }
             show()
         }
     }

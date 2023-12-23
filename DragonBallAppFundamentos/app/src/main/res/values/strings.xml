@@ -9,6 +9,17 @@
     <string name="login_button_loggin">Iniciar sesión</string>
     <string name="login_error_email">El email no es válido</string>
     <string name="login_error_password">Debe contener al menos 3 caracteres</string>
+    <string name="authentication_failed">Las credenciales proporcionadas son incorrectas. Por favor, verifica tu correo electrónico y contraseña e inténtalo nuevamente.</string>
+    <string name="authentication_failed_error_message">Autenticación fallida</string>
+    <string name="ok">OK</string>
+    <string name="r_u_sure">¿Estás seguro?</string>
+    <string name="leave_app">¿Quieres abandonar la aplicación?</string>
+    <string name="yes">SÍ</string>
+    <string name="no">NO</string>
+    <string name="close_app">¿Quieres cerrar la sesión en la aplicación?</string>
+    <string name="load_characters_failed">Lo siento. No se han podido recuperar los datos desde el servidor. Reinicia la aplicación o vuelva a entrar en otro momento.</string>
+    <string name="character_defeated">Personaje derrotado</string>
+    <string name="training_harder">¡Tienes que entrenar más!</string>
 
 
     <string name="hello_blank_fragment">hello_blank_fragment</string>

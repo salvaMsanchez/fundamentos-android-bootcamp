@@ -39,10 +39,10 @@ class HomeActivity : AppCompatActivity() {
 
     private fun showFinishDialog() {
         MaterialAlertDialogBuilder(this).apply {
-            setTitle("¿Estás seguro?")
-            setMessage("¿Quieres abandonar la aplicación?")
-            setPositiveButton("SÍ") { _, _ -> finish() }
-            setNegativeButton("NO", null)
+            setTitle(getString(R.string.r_u_sure))
+            setMessage(getString(R.string.leave_app))
+            setPositiveButton(getString(R.string.yes)) { _, _ -> finish() }
+            setNegativeButton(getString(R.string.no), null)
             show()
         }
     }

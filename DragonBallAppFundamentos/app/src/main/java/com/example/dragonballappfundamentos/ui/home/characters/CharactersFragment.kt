@@ -101,8 +101,8 @@ class CharactersFragment : Fragment() {
     private fun showLoadCharactersFailedDialog(errorMessage: String) {
         MaterialAlertDialogBuilder(binding.root.context).apply {
             setTitle(errorMessage)
-            setMessage("Lo siento. No se han podido recuperar los datos desde el servidor. Reinicia la aplicación o vuelva a entrar en otro momento.")
-            setPositiveButton("OK", null)
+            setMessage(getString(R.string.load_characters_failed))
+            setPositiveButton(getString(R.string.ok), null)
             show()
         }
     }
@@ -124,10 +124,10 @@ class CharactersFragment : Fragment() {
 
     private fun showLogoutDialog() {
         MaterialAlertDialogBuilder(binding.root.context).apply {
-            setTitle("¿Estás seguro?")
-            setMessage("¿Quieres cerrar la sesión en la aplicación?")
-            setPositiveButton("SÍ") { _, _ -> logout() }
-            setNegativeButton("NO", null)
+            setTitle(getString(R.string.r_u_sure))
+            setMessage(getString(R.string.close_app))
+            setPositiveButton(getString(R.string.yes)) { _, _ -> logout() }
+            setNegativeButton(getString(R.string.no), null)
             show()
         }
     }

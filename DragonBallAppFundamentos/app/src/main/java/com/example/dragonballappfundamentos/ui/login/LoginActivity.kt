@@ -85,8 +85,8 @@ class LoginActivity : AppCompatActivity() {
     private fun showAuthenticationFailedDialog(errorMessage: String) {
         MaterialAlertDialogBuilder(this).apply {
             setTitle(errorMessage)
-            setMessage("Las credenciales proporcionadas son incorrectas. Por favor, verifica tu correo electrónico y contraseña e inténtalo nuevamente.")
-            setPositiveButton("OK", null)
+            setMessage(getString(R.string.authentication_failed))
+            setPositiveButton(getString(R.string.ok), null)
             show()
         }
     }
