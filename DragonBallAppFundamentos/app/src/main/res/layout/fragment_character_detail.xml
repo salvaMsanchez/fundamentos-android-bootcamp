@@ -111,6 +111,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_health"
                     android:backgroundTint="@color/green"
+                    app:tint="@color/white"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -146,6 +147,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_waving_hand"
                     android:backgroundTint="@color/damage"
+                    app:tint="@color/white"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>

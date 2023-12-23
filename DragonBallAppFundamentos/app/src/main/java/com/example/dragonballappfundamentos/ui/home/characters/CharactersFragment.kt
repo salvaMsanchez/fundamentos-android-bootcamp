@@ -116,7 +116,7 @@ class CharactersFragment : Fragment() {
 
     private fun initListeners() {
         binding.ivRecoverLife.setOnClickListener {
-            // Todooooo!!
+            sharedViewModel.onRecoverLifeButtonPressed()
         }
         binding.ivLogout.setOnClickListener {
             showLogoutDialog()

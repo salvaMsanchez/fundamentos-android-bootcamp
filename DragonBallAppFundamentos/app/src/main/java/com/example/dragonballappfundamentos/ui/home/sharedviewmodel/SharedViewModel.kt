@@ -108,6 +108,12 @@ class SharedViewModel: ViewModel() {
         }
     }
 
+    fun onRecoverLifeButtonPressed() {
+        _characters.value = _characters.value.map { character ->
+            Character(character.name, character.photo, character.maxLife, 100, character.timesSelected)
+        }
+    }
+
     fun addCharacterTimesSelected(characterPosition: Int) {
         val characterSelected: Character = _characters.value[characterPosition]
         val characterUpdated: Character = Character(characterSelected.name, characterSelected.photo, characterSelected.maxLife, characterSelected.currentLife, characterSelected.timesSelected + 1)
