@@ -9,7 +9,7 @@ import com.example.dragonballappfundamentos.databinding.ItemCharacterBinding
 import com.example.dragonballappfundamentos.ui.home.characters.model.Character
 
 class CharactersViewHolder(view: View): RecyclerView.ViewHolder(view) {
-
+    // VIEW BINDING
     private var binding = ItemCharacterBinding.bind(view)
 
     fun bind(character: Character, position: Int, onItemSelected: (Int) -> Unit) {

@@ -11,15 +11,17 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 
 class APIClient() {
-
+    // COMPANION OBJECT
     companion object {
         private const val BASE_URL = "https://dragonball.keepcoding.education/api/"
         private const val LOGIN_EXTENSION = "auth/login"
         private const val GET_CHARACTERS_EXTENSION = "heros/all"
     }
 
+    // PROPERTIES
     private var token = ""
 
+    // FUNCTIONS
     fun getToken(): String {
         return token
     }

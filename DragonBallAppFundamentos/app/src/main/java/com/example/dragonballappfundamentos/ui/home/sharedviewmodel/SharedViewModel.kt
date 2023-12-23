@@ -15,9 +15,10 @@ import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class SharedViewModel: ViewModel() {
-
+    // API CLIENT
     private val apiClient = APIClient()
 
+    // STATES
     private val _characters = MutableStateFlow<List<Character>>(emptyList())
     val characters: StateFlow<List<Character>> = _characters
 
@@ -27,9 +28,11 @@ class SharedViewModel: ViewModel() {
     private val _viewState = MutableStateFlow<HomeViewState>(HomeViewState.Loading(true))
     val viewState: StateFlow<HomeViewState> = _viewState
 
+    // PROPERTIES
     val charactersRaw: String
         get() = Gson().toJson(_characters.value)
 
+    // FUNCTIONS
     fun onViewAppearWithoutDataSaved(token: String) {
         _viewState.value = HomeViewState.Loading(true)
         viewModelScope.launch(Dispatchers.IO) {

@@ -10,9 +10,10 @@ import com.example.dragonballappfundamentos.ui.home.characters.CharactersFragmen
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class HomeActivity : AppCompatActivity() {
-
+    // VIEW BINDING
     lateinit var binding: ActivityHomeBinding
 
+    // LIFECYCLE
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -23,6 +24,7 @@ class HomeActivity : AppCompatActivity() {
         showCharactersFragment()
     }
 
+    // FUNCTIONS
     private val onBackPressedCallback = object: OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             val currentFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
@@ -39,8 +41,8 @@ class HomeActivity : AppCompatActivity() {
         MaterialAlertDialogBuilder(this).apply {
             setTitle("¿Estás seguro?")
             setMessage("¿Quieres abandonar la aplicación?")
-            setPositiveButton("Sí") { _, _ -> finish() }
-            setNegativeButton("No", null)
+            setPositiveButton("SÍ") { _, _ -> finish() }
+            setNegativeButton("NO", null)
             show()
         }
     }
@@ -49,8 +51,6 @@ class HomeActivity : AppCompatActivity() {
         supportFragmentManager
             .beginTransaction()
             .add(binding.fragmentContainerView.id, CharactersFragment())
-            //.replace(binding.fragmentContainerView.id, CharactersFragment())
-            //.addToBackStack(null)
             .commit()
     }
 }

@@ -12,16 +12,19 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class LoginActivityViewModel(): ViewModel() {
-
+    // COMPANION OBJECT
     private companion object {
         const val MIN_PASSWORD_LENGTH = 3
     }
 
+    // API CLIENT
     private val apiClient = APIClient()
 
+    // STATES
     private val _viewState = MutableStateFlow<LoginViewState>(LoginViewState.Loading(false))
     val viewState: StateFlow<LoginViewState> = _viewState
 
+    // FUNCTIONS
     fun onLoginSelected(email: String, password: String) {
         if (isValidEmail(email) && isValidPassword(password)) {
             loginUser(email, password)
@@ -31,14 +34,12 @@ class LoginActivityViewModel(): ViewModel() {
     }
 
     private fun loginUser(email: String, password: String) {
-        Log.i("SALVA", "$email & $password")
         _viewState.value = LoginViewState.Loading(true)
         viewModelScope.launch(Dispatchers.IO) {
             if (apiClient.login(email, password)) {
                 _viewState.value = LoginViewState.AccessCompleted(apiClient.getToken())
                 _viewState.value = LoginViewState.Loading(false)
             } else {
-                Log.i("SALVA", "ERROR EN LA LLAMADA")
                 _viewState.value = LoginViewState.Loading(false)
                 _viewState.value = LoginViewState.Error("Autenticación fallida")
             }

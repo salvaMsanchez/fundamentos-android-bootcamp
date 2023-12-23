@@ -23,20 +23,20 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
-
-    val viewModel: LoginActivityViewModel by viewModels()
+    // VIEW BINDING
     private lateinit var binding: ActivityLoginBinding
+    // VIEW MODEL
+    val viewModel: LoginActivityViewModel by viewModels()
 
+    // LIFECYCLE
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         if (SharedPreferencesService.getToken(this) != "No Token") {
-            Log.i("SALVA", "Navegando al Home directamente sin pasar por Login")
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
             finish()
         } else {
-            Log.i("SALVA", "Navegando al Login")
             binding = ActivityLoginBinding.inflate(layoutInflater)
             setContentView(binding.root)
 
@@ -44,6 +44,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    // FUNCTIONS
     private fun initUI() {
         initListeners()
         initObservers()
@@ -66,11 +67,6 @@ class LoginActivity : AppCompatActivity() {
         if (emailText != null && passwordText != null) {
             binding.btnLogin.isVisible = isValidEmail && isValidPassword && emailText.isNotEmpty() && passwordText.isNotEmpty()
         }
-
-
-        //binding.tiEmail.error = if (viewState.isValidEmail) null else getString(R.string.login_error_email)
-        //binding.tiPassword.error = if (viewState.isValidPassword) null else getString(R.string.login_error_password)
-        //binding.pbLoginLoading.isVisible = viewState.isLoading
     }
 
     private fun updateUI(viewState: LoginViewState) {
@@ -90,7 +86,7 @@ class LoginActivity : AppCompatActivity() {
         MaterialAlertDialogBuilder(this).apply {
             setTitle(errorMessage)
             setMessage("Las credenciales proporcionadas son incorrectas. Por favor, verifica tu correo electrónico y contraseña e inténtalo nuevamente.")
-            setPositiveButton("Ok", null)
+            setPositiveButton("OK", null)
             show()
         }
     }
@@ -117,7 +113,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun navigateToHome(token: String) {
-        Log.i("SALVA", "El token es $token")
         SharedPreferencesService.saveToken(this, token = token)
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
@@ -132,5 +127,4 @@ class LoginActivity : AppCompatActivity() {
             )
         }
     }
-
 }

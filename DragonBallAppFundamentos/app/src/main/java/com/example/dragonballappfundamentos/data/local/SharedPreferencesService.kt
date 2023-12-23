@@ -3,11 +3,12 @@ package com.example.dragonballappfundamentos.data.local
 import android.content.Context
 
 object SharedPreferencesService {
-
+    // PROPERTIES
     private const val PREFS_NAME = "DragonBallFundamentosAndroid"
     private const val TOKEN_KEY = "tokenKey"
     private const val CHARACTERS_KEY = "charactersKey"
 
+    // FUNCTIONS
     fun getCharacters(context: Context, key: String = CHARACTERS_KEY, defaultValue: String = "No Characters"): String {
         val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         return sharedPref.getString(key, defaultValue) ?: defaultValue

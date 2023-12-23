@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CharacterDetailFragment : Fragment(), OnBackPressedListenerCharacterDetail {
-
+    // COMPANION OBJECT
     companion object {
         private const val ARG_CHARACTER_POSITION = "characterPosition"
 
@@ -37,10 +37,12 @@ class CharacterDetailFragment : Fragment(), OnBackPressedListenerCharacterDetail
         }
     }
 
+    // VIEW BINDING
     private lateinit var binding: FragmentCharacterDetailBinding
-
+    // VIEW MODEL
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
+    // LIFECYCLE
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,6 +57,7 @@ class CharacterDetailFragment : Fragment(), OnBackPressedListenerCharacterDetail
         initUI()
     }
 
+    // FUNCTIONS
     private fun initUI() {
         initComponents()
         initListeners()

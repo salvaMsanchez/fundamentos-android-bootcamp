@@ -26,13 +26,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CharactersFragment : Fragment() {
-
+    // VIEW BINDING
     private lateinit var binding: FragmentCharactersBinding
 
+    // RECYCLER VIEW - ADAPTER
     private lateinit var adapter: CharactersAdapter
-
+    // VIEW MODEL
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
+    // LIFECYCLE
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,19 +45,17 @@ class CharactersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.i("Salva", "El token recuperado de SharedPreferences es ${SharedPreferencesService.getToken(binding.root.context)}")
 
         initUI()
 
         if (SharedPreferencesService.getCharacters(binding.root.context) != "No Characters") {
-            Log.i("Salva", "Datos recuperados desde SharedPreferences")
             sharedViewModel.onViewAppearWithDataSaved(SharedPreferencesService.getCharacters(binding.root.context))
         } else {
-            Log.i("Salva", "Datos recuperados desde la API")
             sharedViewModel.onViewAppearWithoutDataSaved(SharedPreferencesService.getToken(binding.root.context))
         }
     }
 
+    // FUNCTIONS
     private fun initUI() {
         initListeners()
         initObservers()
@@ -102,13 +102,12 @@ class CharactersFragment : Fragment() {
         MaterialAlertDialogBuilder(binding.root.context).apply {
             setTitle(errorMessage)
             setMessage("Lo siento. No se han podido recuperar los datos desde el servidor. Reinicia la aplicación o vuelva a entrar en otro momento.")
-            setPositiveButton("Ok", null)
+            setPositiveButton("OK", null)
             show()
         }
     }
 
     private fun showLoading(loading: Boolean) {
-        Log.i("Salva", "El estado del loading es $loading")
         binding.pbCharactersLoading.visibility = View.GONE
         binding.charactersToolbar.isVisible = !loading
         binding.rvCharacters.isVisible = !loading
@@ -127,8 +126,8 @@ class CharactersFragment : Fragment() {
         MaterialAlertDialogBuilder(binding.root.context).apply {
             setTitle("¿Estás seguro?")
             setMessage("¿Quieres cerrar la sesión en la aplicación?")
-            setPositiveButton("Sí") { _, _ -> logout() }
-            setNegativeButton("No", null)
+            setPositiveButton("SÍ") { _, _ -> logout() }
+            setNegativeButton("NO", null)
             show()
         }
     }
