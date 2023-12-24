@@ -4,10 +4,6 @@
   <strong><span>Bootcamp Desarrollo de Apps Móviles </span></strong>
 </h1>
 
-<h1 align="center">
-  <strong><span>🚨 FALTA REDACTAR 🚨 </span></strong>
-</h1>
-
 ---
 
 <p align="center">
@@ -63,7 +59,11 @@
 <a name="proyecto"></a>
 ## Proyecto: Dragon Ball Heroes App
 
-![Demo app iOS gif](images/demoAppiOS.gif)
+![Demo app Android gif](images/demoAppAndroid.gif)
+
+<h1 align="center">
+  <strong><span>🚨⬇️ POR REDACTAR ⬇️🚨 </span></strong>
+</h1>
 
 <a name="descripcion"></a>
 ### Descripción
