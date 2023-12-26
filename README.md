@@ -25,12 +25,11 @@
 ## Índice
  
 * [Herramientas](#herramientas)
-* [Proyecto: Dragon Ball Battle Simulator App](#proyecto)
+* [Proyecto: Dragon Ball Battle Simulator App 👊🏻](#proyecto)
 	* [Descripción](#descripcion)
 	* [Requisitos](#requisitos)
 		* [Obligatorios](#obligatorios)
 		* [Opcionales](#opcionales)
-	* [Diseño](#diseno)
 	* [Problemas, decisiones y resolución](#problemas)
 	* [Instalación](#instalacion)
 	* [Licencia](#licencia)
