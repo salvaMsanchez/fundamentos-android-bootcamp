@@ -98,7 +98,23 @@ Dragon Ball Battle Simulator es una aplicación Android desarrollada en Kotlin q
 <a name="problemas"></a>
 ### Problemas, decisiones y resolución
 
-🚨 POR REDACTAR 🚨
+#### Manejo del Token en SharedPreferences
+
+Al abordar la persistencia del token en SharedPreferences, se reconoce que esta práctica no es óptima, pero se ha implementado utilizando un enfoque que utiliza un `object` a modo de *Singleton* denominada `SharedPreferencesService`. Aunque inicialmente se intentó gestionar el token directamente en la clase `APIClient` mediante una variable con acceso personalizado (`get` y `set`), se encontró dificultad al tratar con el contexto necesario para interactuar con SharedPreferences. Intentar pasar el contexto al `APIClient` generó problemas, especialmente al necesitarlo desde el *ViewModel*, lo cual representa una mala práctica ya que podría causar fugas de memoria (*memory leaks*).
+
+Para superar este desafío, y como ya he comentado, se optó por utilizar un objeto *Singleton* que permitiera acceder a los datos de *SharedPreferences* desde cualquier parte de la aplicación. Aunque esto resolvió el problema inmediato, es importante tener en cuenta las consideraciones de seguridad y explorar alternativas más robustas para gestionar el almacenamiento seguro de datos sensibles.
+
+#### Elección e inicialización de Vistas en LoginActivity
+
+En la implementación actual, la decisión de inicializar la vista principal de la aplicación (*Home*) o la del *Login* se realiza en el método `onCreate` de la actividad `LoginActivity`. Esta elección se basa en la simplicidad y en las limitadas exigencias arquitectónicas de la aplicación. Sin embargo, se reconoce que, dependiendo de las funcionalidades del proyecto, otras estrategias podrían haberse considerado.
+
+Alternativas como la inclusión de un `SplashScreen` con lógica de enrutamiento o la creación de una `RouteActivity` para gestionar estas decisiones podrían haber sido exploradas. Estas opciones ofrecen una mayor flexibilidad y escalabilidad, especialmente en proyectos que pueden evolucionar con requisitos más complejos.
+
+#### Gestión de Activities y Fragments en el Logout
+
+Al tratar con la gestión de la destrucción de *activities* y *fragments* durante el *logout*, surgió un problema al navegar desde el primer fragment de `HomeActivity` al `LoginActivity`. Se observó que, aunque se realizaba la navegación al `LoginActivity`, el *fragment* no se destruía adecuadamente. Esto resultaba en comportamientos inesperados al realizar un *"back"* desde el dispositivo después de un nuevo inicio de sesión, ya que se volvía al *fragment* previamente no destruido.
+
+Para abordar esta situación, es crucial garantizar la destrucción adecuada de *fragments* y *activities* al realizar acciones como el *logout*. Se podría explorar el uso de *popBackStack* o estrategias similares para asegurar que la pila de fragmentos se gestione correctamente y se evite la reaparición de *fragments* no deseados después de ciertas transiciones, como el *login*. La comprensión profunda de los ciclos de vida de *activities* y *fragments* es esencial para evitar problemas relacionados con la navegación en la aplicación.
 
 <a name="instalacion"></a>
 ### Instalación
