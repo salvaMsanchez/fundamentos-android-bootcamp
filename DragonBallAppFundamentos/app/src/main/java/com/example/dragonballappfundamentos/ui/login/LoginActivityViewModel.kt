@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginActivityViewModel(): ViewModel() {
     // COMPANION OBJECT
@@ -34,11 +35,12 @@ class LoginActivityViewModel(): ViewModel() {
     private fun loginUser(email: String, password: String) {
         _viewState.value = LoginViewState.Loading(true)
         viewModelScope.launch(Dispatchers.IO) {
-            if (apiClient.login(email, password)) {
-                _viewState.value = LoginViewState.AccessCompleted(apiClient.getToken())
-                _viewState.value = LoginViewState.Loading(false)
-            } else {
-                _viewState.value = LoginViewState.Error("Autenticación fallida")
+            apiClient.login(email, password) { loginSuccess ->
+                if (loginSuccess) {
+                    _viewState.value = LoginViewState.AccessCompleted(apiClient.getToken())
+                } else {
+                    _viewState.value = LoginViewState.Error("Autenticación fallida")
+                }
                 _viewState.value = LoginViewState.Loading(false)
             }
         }

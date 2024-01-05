@@ -1,12 +1,17 @@
 package com.example.dragonballappfundamentos.data.network
 
+import android.widget.RatingBar.OnRatingBarChangeListener
 import com.example.dragonballappfundamentos.domain.models.CharacterDTO
 import com.example.dragonballappfundamentos.ui.home.characters.model.Character
 import com.google.gson.Gson
+import okhttp3.Call
+import okhttp3.Callback
 import okhttp3.Credentials
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.Response
+import okio.IOException
 
 class APIClient() {
     // COMPANION OBJECT
@@ -24,7 +29,7 @@ class APIClient() {
         return token
     }
 
-    fun login(email: String, password: String): Boolean {
+    fun login(email: String, password: String, onResult: (Boolean) -> Unit) {
         val client = OkHttpClient()
         val url = "${Companion.BASE_URL}${LOGIN_EXTENSION}"
         val credentials = Credentials.basic(email, password)
@@ -35,15 +40,19 @@ class APIClient() {
             .addHeader("Authorization", credentials)
             .post(formBody)
             .build()
-        val call = client.newCall(request)
-        val response = call.execute()
-        return if (response.isSuccessful) {
-            response.body?.let {
-                token = it.string()
+
+        try {
+            val response = client.newCall(request).execute()
+            if (response.isSuccessful) {
+                response.body?.let {
+                    token = it.string()
+                }
+                onResult(true)
+            } else {
+                onResult(false)
             }
-            true
-        } else {
-            false
+        } catch (e:IOException) {
+            onResult(false)
         }
     }
 
