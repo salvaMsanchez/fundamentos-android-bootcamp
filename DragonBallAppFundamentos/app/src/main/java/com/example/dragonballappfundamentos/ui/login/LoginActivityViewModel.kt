@@ -38,8 +38,8 @@ class LoginActivityViewModel(): ViewModel() {
                 _viewState.value = LoginViewState.AccessCompleted(apiClient.getToken())
                 _viewState.value = LoginViewState.Loading(false)
             } else {
-                _viewState.value = LoginViewState.Loading(false)
                 _viewState.value = LoginViewState.Error("Autenticación fallida")
+                _viewState.value = LoginViewState.Loading(false)
             }
         }
     }
