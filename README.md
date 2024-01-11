@@ -65,7 +65,7 @@
 <a name="descripcion"></a>
 ### Descripción
 
-Dragon Ball Battle Simulator es una aplicación Android desarrollada en Kotlin que permite a los usuarios simular batallas con personajes de Dragon Ball. La aplicación sigue una arquitectura MVVM y cumple con una serie de requisitos obligatorios y opcionales, brindando una experiencia de juego coherente.
+Dragon Ball Battle Simulator es una aplicación Android desarrollada en Kotlin que permite a los usuarios simular batallas con personajes de Dragon Ball. La aplicación sigue un patrón de diseño MVVM y cumple con una serie de requisitos obligatorios y opcionales, brindando una experiencia de juego coherente.
 
 <a name="requisitos"></a>
 ### Requisitos
@@ -76,8 +76,8 @@ Dragon Ball Battle Simulator es una aplicación Android desarrollada en Kotlin q
 1. **Ventanas y actividades:**
 	* Ventana 1: Actividad de inicio de sesión.
 	* Ventanas 2 y 3: Fragmentos compartidos en una segunda actividad.
-2. **Arquitectura MVVM:**
-	* Implementación de la arquitectura Modelo-Vista-VistaModelo-VistaModelo.
+2. **MVVM:**
+	* Implementación del patrón de diseño Modelo-Vista-VistaModelo.
 3. **Diseño coherente y eficaz:**
 	* Diseño libre, pero con atención a la coherencia y eficacia en la presentación de elementos.
 4. **Clases de Personajes:**
